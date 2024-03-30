@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- 
+            There's a great difference when importing css or js files in Flask. 
+            You need to use Jinja and url_for() to link to the style sheet.
+        -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <title>Document</title>
+
+        <!-- Jinja2: create a block called head, the space inside the block is where we're inserting codes written other child HTML files -->
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body>
+        <!-- Jinja2: similar to the above -->
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

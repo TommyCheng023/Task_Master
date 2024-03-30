@@ -1,0 +1,44 @@
+<!-- 
+    put all general lines in `base.html` and apply this structure for every HTML file 
+        example: link to a general `content.css`; build and design a navbar in `base.html`
+-->
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Task Master</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">Task Master</h1>
+    {% if tasks|length < 1 %}
+    <h4 style="text-align: center; color: red">You don't have any tasks for now. Great work!</h4>
+    {% else %}
+    <table>
+        <!-- header row (static) -->
+        <tr>
+            <th>Task</th>
+            <th>Added</th>
+            <th>Actions</th>
+        </tr>
+        <!-- content rows (dynamic) -->
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.content }}</td>
+            <td>{{ task.date_created.date() }}</td> <!-- use date() to fetch needed part from the `datetime` object -->
+            <td>
+                <a href="/delete/{{ task.id }}">Delete</a>
+                <br />
+                <a href="/update/{{ task.id }}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <form action="/" method="POST">
+        <input type="text" name="content" id="content" placeholder="Type something about your task...">
+        <input type="submit" value="Add Task">
+    </form>
+</div>
+{% endblock %}
